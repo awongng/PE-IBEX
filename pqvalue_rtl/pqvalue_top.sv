@@ -1,6 +1,6 @@
 //pqvalue_top.sv
 //Custom ALU top module
-//Adapted for register files with 2 read ports and 1 write port
+//Adapted for register files with 2 read ports and 1 write port ()
 
 //sel_op_i :
 //00 : Unused
@@ -41,6 +41,6 @@ module pqvalue_top (
 		.c_o(mul_out_s)	
 	);
 
-	assign operand_o = 0;//WIP
+	assign operand_o = (sel_op_i[0] ? (sel_op_i[1] ? mul_out_s : add_out_s) : sub_out_s);
 
 endmodule : butterfly
