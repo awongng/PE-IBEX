@@ -35,8 +35,8 @@ module pqvalue_top (
 	);
 
 	mod_mul mod_mul (//Modular multiplication
-		.a_i({1'b0,a_i}),
-		.b_i({1'b0,b_i}),
+		.a_i(a_i),
+		.b_i(b_i),
 		.select_i(sel_red_i),
 		.c_o(mul_out_s)	
 	);
