@@ -67,7 +67,8 @@ package ibex_pkg;
     OPCODE_BRANCH   = 7'h63,
     OPCODE_JALR     = 7'h67,
     OPCODE_JAL      = 7'h6f,
-    OPCODE_SYSTEM   = 7'h73
+    OPCODE_SYSTEM   = 7'h73,
+    OPCODE_PQVALUE  = 7'h77 // for PQVALUE extension
   } opcode_e;
 
 
@@ -192,6 +193,16 @@ package ibex_pkg;
     MD_OP_REM
   } md_op_e;
 
+  typedef enum logic [3:0] {
+    // PQVALUE extension modular operations
+    //Butterflies are omitted because of hardware limitations (two read ports and one write port only)
+    PQ.MOD_ADD_DIL,
+    PQ.MOD_SUB_DIL,
+    PQ.MOD_MUL_DIL,
+    PQ.MOD_ADD_KYB,
+    PQ.MOD_SUB_KYB,
+    PQ.MOD_MUL_KYB
+  } pq_op_e;
 
   //////////////////////////////////
   // Control and status registers //
