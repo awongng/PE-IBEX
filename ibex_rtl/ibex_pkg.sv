@@ -193,7 +193,7 @@ package ibex_pkg;
     MD_OP_REM
   } md_op_e;
 
-  typedef enum logic [3:0] {
+  typedef enum logic [2:0] {
     // PQVALUE extension modular operations
     //Butterflies are omitted because of hardware limitations (two read ports and one write port only)
     PQ.MOD_ADD_DIL,
