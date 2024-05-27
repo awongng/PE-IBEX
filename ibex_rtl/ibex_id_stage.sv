@@ -72,6 +72,11 @@ module ibex_id_stage #(
   output logic [31:0]               alu_operand_a_ex_o,
   output logic [31:0]               alu_operand_b_ex_o,
 
+  //PQVALUE
+  output  ibex_pkg::pq_op_e         pq_operator_ex_o,
+  output  logic [22:0]              pq_operand_a_ex_o,
+  output  logic [22:0]              pq_operand_b_ex_o,
+
   // Multicycle Operation Stage Register
   input  logic [1:0]                imd_val_we_ex_i,
   input  logic [33:0]               imd_val_d_ex_i[2],
@@ -272,6 +277,9 @@ module ibex_id_stage #(
   imm_a_sel_e  imm_a_mux_sel;
   imm_b_sel_e  imm_b_mux_sel, imm_b_mux_sel_dec;
 
+  //PQVALUE extension control
+  pq_op_e      pq_operator;
+
   // Multiplier Control
   logic        mult_en_id, mult_en_dec; // use integer multiplier
   logic        div_en_id, div_en_dec;   // use integer division or reminder
@@ -291,6 +299,9 @@ module ibex_id_stage #(
 
   logic [31:0] alu_operand_a;
   logic [31:0] alu_operand_b;
+
+  logic [22:0] pq_operand_a;
+  logic [22:0] pq_operand_b;
 
   /////////////
   // LSU Mux //
@@ -392,6 +403,11 @@ module ibex_id_stage #(
   // ALU MUX for Operand B
   assign alu_operand_b = (alu_op_b_mux_sel == OP_B_IMM) ? imm_b : rf_rdata_b_fwd;
 
+  //PQVALUE Operand A and B
+  assign pq_operand_a = rf_rdata_a_fwd[22:0];
+  assign pq_operand_b = rf_rdata_b_fwd[22:0];
+
+
   /////////////////////////////////////////
   // Multicycle Operation Stage Register //
   /////////////////////////////////////////
@@ -482,6 +498,9 @@ module ibex_id_stage #(
     .alu_op_a_mux_sel_o(alu_op_a_mux_sel_dec),
     .alu_op_b_mux_sel_o(alu_op_b_mux_sel_dec),
     .alu_multicycle_o  (alu_multicycle_dec),
+
+    //PQVALUE
+    .pq_operator_o(pq_operator),
 
     // MULT & DIV
     .mult_en_o            (mult_en_dec),
@@ -667,6 +686,10 @@ module ibex_id_stage #(
   assign alu_operator_ex_o           = alu_operator;
   assign alu_operand_a_ex_o          = alu_operand_a;
   assign alu_operand_b_ex_o          = alu_operand_b;
+
+  assign pq_operator_ex_o            = pq_operator;
+  assign pq_operand_a_ex_o           = pq_operand_a;
+  assign pq_operand_b_ex_o           = pq_operand_b;
 
   assign mult_en_ex_o                = mult_en_id;
   assign div_en_ex_o                 = div_en_id;
