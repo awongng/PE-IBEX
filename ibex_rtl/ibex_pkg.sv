@@ -392,6 +392,7 @@ package ibex_pkg;
   parameter int unsigned IC_TAG_SIZE      = ADDR_W - IC_INDEX_W - IC_LINE_W + 1; // 1 valid bit
   parameter int unsigned IC_OUTPUT_BEATS  = (BUS_BYTES / 2); // number of halfwords
   // ICache Scrambling Parameters
+  //Changes made have to be reflected in ibex_topper.v
   parameter int unsigned SCRAMBLE_KEY_W   = 128;
   parameter int unsigned SCRAMBLE_NONCE_W = 64;
 
