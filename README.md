@@ -4,6 +4,8 @@ Implementation of a custom ALU extension (see this [repository](https://github.c
 
 In order to use this project, merge and overwrite its content into the [IBEX repository](https://github.com/lowRISC/ibex).
 
+This repository only contains RTL files, but proper integration of the custom ALU extension into the IBEX core will probably require other files to be added or modified from IBEX's repository.
+
 ## Modifications to original IBEX
 
 ### Files added
